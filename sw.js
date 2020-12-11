@@ -27,35 +27,27 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-900eae6cd00552476a6d.js"
+    "url": "webpack-runtime-85cda03d0086676a3b83.js"
   },
   {
-    "url": "framework-a7bb16c5c6afeed647b2.js"
+    "url": "framework-85aff51d15c28c7fbe5f.js"
   },
   {
-    "url": "app-5ace48135a72e5eb9c6e.js"
+    "url": "app-2653de7f04267f904f46.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "7db45f18d7858d735ca8cf63676effa0"
+    "revision": "975a2752c527d4a7a19526111bf847ed"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-e5cb9e0c77a823b86dc2.js"
   },
   {
-    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
-    "revision": "f6081b83111aea4128c98944b7fafccc"
-  },
-  {
-    "url": "page-data/app-data.json",
-    "revision": "923bb740e47d6a3c92ab5f2c1f158a3c"
-  },
-  {
-    "url": "polyfill-96944360c994d9f3d6ec.js"
+    "url": "polyfill-46800a246443c64ac6e0.js"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "be6efede62c8d3a8f6c3110c7ffc5078"
+    "revision": "e7e59d7797eb6b9b4a7117b0d2deec7e"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -142,12 +134,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^/gachamukutest`), ``)
+  pathname = pathname.replace(new RegExp(`^`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/gachamukutest/app-5ace48135a72e5eb9c6e.js`))) {
+  if (!resources || !(await caches.match(`/app-2653de7f04267f904f46.js`))) {
     return await fetch(event.request)
   }
 
@@ -160,7 +152,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/gachamukutest/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
